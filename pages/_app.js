@@ -9,6 +9,15 @@ import "@shopify/polaris/dist/styles.css";
 // Translations are provided in the locales folder. When using Polaris, you are able to import translations from all languages supported by the core Shopify product and consume them through the i18n prop.
 import translations from "@shopify/polaris/locales/en.json";
 import ClientRouter from "../components/ClientRouter";
+// apollo client enables browsers to easily authenticate by passing your credentials with every graphql request
+import ApolloClient from "apollo-boost";
+import { ApolloProvider } from "react-apollo";
+
+const client = new ApolloClient({
+  fetchOptions: {
+    credentials: "include"
+  }
+});
 
 class MyApp extends App {
   render() {
@@ -28,7 +37,9 @@ class MyApp extends App {
         <Provider config={config}>
           <ClientRouter />
           <AppProvider i18n={translations}>
-            <Component {...pageProps} />
+            <ApolloProvider client={client}>
+              <Component {...pageProps} />
+            </ApolloProvider>
           </AppProvider>
         </Provider>
       </>
