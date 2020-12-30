@@ -8,6 +8,7 @@ import { Provider } from "@shopify/app-bridge-react";
 import "@shopify/polaris/dist/styles.css";
 // Translations are provided in the locales folder. When using Polaris, you are able to import translations from all languages supported by the core Shopify product and consume them through the i18n prop.
 import translations from "@shopify/polaris/locales/en.json";
+import ClientRouter from "../components/ClientRouter";
 
 class MyApp extends App {
   render() {
@@ -25,6 +26,7 @@ class MyApp extends App {
           <meta charSet='utf-8' />
         </Head>
         <Provider config={config}>
+          <ClientRouter />
           <AppProvider i18n={translations}>
             <Component {...pageProps} />
           </AppProvider>
